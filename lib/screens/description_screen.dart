@@ -16,7 +16,7 @@ class DescriptionScreen extends StatelessWidget {
 
     return new Scaffold(
         appBar: new AppBar(
-            title: new Text('Интернет магазин')),
+            title: new Text('Интернет магазин сетевой')),
         body: Container(
               constraints: BoxConstraints.expand(),
               child: SingleChildScrollView(
