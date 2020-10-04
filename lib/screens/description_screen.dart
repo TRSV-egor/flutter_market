@@ -50,23 +50,9 @@ class DescriptionScreen extends StatelessWidget {
                           ],)
                   ],
                 ),),
-                    ],
-            )
-            
-            
-        )
-    ),
-        bottomNavigationBar:
-        Container(
-          height: 100.0,
-          color: Colors.white,
-          child: Row(
-            children: [
-              Expanded(child:
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.all(1.0),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(padding: EdgeInsets.all(16.0),
                       child: Wrap(
                         children: [
                           FlatButton(
@@ -81,16 +67,11 @@ class DescriptionScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                    ),
                   ),
-              )
-
-
-            ],
-          )
-
-
-        ),
+              )],
+            )
+        )
+    ),
     );
 
   }

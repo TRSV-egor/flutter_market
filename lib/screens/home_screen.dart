@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'description_screen.dart';
+
+//my import
+import 'package:flutter_market/screens/description_screen.dart';
 
 class HomeScreen extends StatefulWidget {
 
