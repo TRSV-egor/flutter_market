@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'home_screen.dart';
 import 'description_screen.dart';
+import 'cart_screen.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -12,8 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
-        buttonColor: Colors.red,
+        primarySwatch: Colors.indigo,
+        buttonColor: Colors.indigoAccent,
         buttonTheme: const ButtonThemeData(
           textTheme: ButtonTextTheme.primary,
         ),
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
         '/splash':(BuildContext context) => WelcomeScreen(),
         '/home':(BuildContext context) => HomeScreen(),
         '/description':(BuildContext context) => DescriptionScreen(),
+        '/cart':(BuildContext context) => CartScreen(),
+
       },
     );
   }
@@ -40,11 +43,12 @@ class WelcomeScreenState extends State<WelcomeScreen> {
     return SplashScreen(
       seconds: 1,
       navigateAfterSeconds: new HomeScreen(),
-      title: new Text('Hello again',),
-      image: new Image.asset('assets/images/LogoFlutter_400x400.jpg', height: 150, width: 150,),
+      title: new Text('Buy parts smarter',
+        style: Theme.of(context).textTheme.headline5,),
+      image: new Image.asset('assets/images/SPM-500.jpg', height: 150, width: 150,),
       loadingText: Text("Just a sec..."),
       photoSize: 100.0,
-      loaderColor: Colors.red,
+      loaderColor: Colors.indigoAccent,
       );
     }
 }

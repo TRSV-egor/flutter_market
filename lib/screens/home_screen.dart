@@ -16,8 +16,18 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
 
     return new Scaffold(
-      appBar: new AppBar(
-          title: new Text('Интернет магазин')),
+        drawer: Drawer(),
+        appBar: new AppBar(
+          title: new Text('SPM - Spare Parts Market'),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                ),
+                onPressed: (){Navigator.pushNamed(context, '/cart');})
+          ],
+      ),
         body: new Container(
           child: FutureBuilder(builder: (context,snapshot){
             if (snapshot.connectionState == ConnectionState.done)
