@@ -20,18 +20,20 @@ class HomeScreenState extends State<HomeScreen> {
           title: new Text('Интернет магазин')),
         body: new Container(
           child: FutureBuilder(builder: (context,snapshot){
-            var myData = json.decode(snapshot.data.toString());
+            if (snapshot.connectionState == ConnectionState.done)
+
+            {var myData = json.decode(snapshot.data.toString());
               return new ListView.builder(
-                itemCount: myData == null ?  0 : myData.length,
+                itemCount: myData == null ?  0 : myData["parts"].length,
                 itemBuilder: (BuildContext context,int index) {
                   return GestureDetector(
-                      onTap:() =>  Navigator.push(context,MaterialPageRoute(builder: (context)=> DescriptionScreen(dataFromHomepage: myData[index],))),
+                      onTap:() =>  Navigator.push(context,MaterialPageRoute(builder: (context)=> DescriptionScreen(dataFromHomepage: myData['parts'][index],))),
                       child: new Card(
                           child: new Row(
                             children: [
                               FittedBox(
                                 fit: BoxFit.cover,
-                                child: Image.network(myData[index]["imageURL"], width: 80, height: 80,) ,
+                                child: Image.network(myData["parts"][index]["imageURL"], width: 80, height: 80,) ,
                               ),
                               Container(
                                 child: Expanded(
@@ -39,26 +41,31 @@ class HomeScreenState extends State<HomeScreen> {
                                     child: Column(
                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                      children: [
-                                      Text(myData[index]["title"],
+                                      Text(myData["parts"][index]["title"],
                                             style: Theme.of(context).textTheme.headline5,
                                             overflow: TextOverflow.fade,
                                             textAlign: TextAlign.left,
                                       ),
                                       Divider(),
-                                      Text('${myData[index]["price"]} руб.',
+                                      Text('${myData["parts"][index]["price"]} руб.',
                                             textAlign: TextAlign.end,
                                             style: Theme.of(context).textTheme.bodyText1,
                                     ),
                                   ],),))
-                              )]
+                              )
+                            ]
                         ),
                       )
                   );
                   // showDialog(
                 },
-              );
+              );} else {
+              return Center(
+                  child: CircularProgressIndicator());
+            }
         },
-          future: DefaultAssetBundle.of(context).loadString('assets/sparePartsList.json'),),
+          future: DefaultAssetBundle.of(context).loadString('assets/sparePartsList.json'),
+          ),
       )
     );
   }

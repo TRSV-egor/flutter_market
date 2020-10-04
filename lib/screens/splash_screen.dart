@@ -38,7 +38,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 3,
+      seconds: 1,
       navigateAfterSeconds: new HomeScreen(),
       title: new Text('Hello again',),
       image: new Image.asset('assets/images/LogoFlutter_400x400.jpg', height: 150, width: 150,),
