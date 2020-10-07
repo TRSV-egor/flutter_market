@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //my imports
-import 'package:flutter_market/componets/cart_position.dart';
+import 'package:flutter_market/components/cart_position.dart';
 
 class CartScreen extends StatefulWidget {
 

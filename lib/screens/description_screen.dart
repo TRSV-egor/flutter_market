@@ -5,9 +5,9 @@ import 'package:flutter/rendering.dart';
 
 class DescriptionScreen extends StatelessWidget {
 
-  final dynamic dataFromHomepage;
+  final dynamic dataFromJSON;
 
-  DescriptionScreen({Key key, this.dataFromHomepage}) : super(key: key);
+  DescriptionScreen({Key key, this.dataFromJSON}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +22,23 @@ class DescriptionScreen extends StatelessWidget {
               child: SingleChildScrollView(
                   child: Column(
                 children: [
-                    Image.network(dataFromHomepage['imageURL'],fit: BoxFit.fitHeight,),
+                    Image.network(dataFromJSON.imageURL,fit: BoxFit.fitHeight,),
                     Padding(padding: EdgeInsets.all(16.0),
                       child:
                       Column(
                         children: [
-                          Text(dataFromHomepage["title"],
+                          Text(dataFromJSON.title,
                             style: Theme.of(context).textTheme.headline3),
                           Divider(),
                           Row(
                           //crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Expanded(
-                                child: Text('${dataFromHomepage['price']} руб.',
+                                child: Text('${dataFromJSON.price} руб.',
                                   style: Theme.of(context).textTheme.headline6,
                                   textAlign: TextAlign.left,),),
                               Expanded(
-                                  child: Text('${dataFromHomepage['balance']} шт.',
+                                  child: Text('${dataFromJSON.balance} шт.',
                                       style: Theme.of(context).textTheme.subtitle2,
                                       textAlign: TextAlign.right)),
                             ]
@@ -46,7 +46,7 @@ class DescriptionScreen extends StatelessWidget {
                           Divider(),
                           SizedBox(height: 16.0),
                           Wrap(children: [
-                            Text(dataFromHomepage['description']),
+                            Text(dataFromJSON.description),
                           ],)
                   ],
                 ),),
