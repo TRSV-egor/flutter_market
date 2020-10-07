@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_market/components/cart_position.dart';
 
 
 class DescriptionScreen extends StatelessWidget {
@@ -8,6 +9,7 @@ class DescriptionScreen extends StatelessWidget {
   final dynamic dataFromJSON;
 
   DescriptionScreen({Key key, this.dataFromJSON}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,9 @@ class DescriptionScreen extends StatelessWidget {
                             child: Text('Вернуться'),
                           ),
                           RaisedButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              ListOfProducts().productAdd(dataFromJSON);
+                            },
                             child: const Text('В корзину'),
                           )
                         ],

@@ -13,11 +13,14 @@ class CartScreen extends StatefulWidget {
 
 class CartScreenState extends State<CartScreen> {
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Корзина'),
+        title: Text("Корзина"),
       ),
       body: CartPosition(),
       bottomNavigationBar: Container(
@@ -26,11 +29,13 @@ class CartScreenState extends State<CartScreen> {
           children: [
             Expanded(
                 child: ListTile(
-                  title: Text("Всего: "),
+                  title: Text("Всего: ${ListOfProducts().totalCartValue}"),
                   subtitle: Text("\$2000"),
                 ),),
           Expanded(
-              child: MaterialButton(onPressed: (){}, 
+              child: MaterialButton(onPressed: (){
+               // ListOfProducts().productRemove(ListOfProducts().cartList, index);
+                },
                 child: Text('Оплата'),
                 color: Colors.indigoAccent,),
           )

@@ -1,6 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+class ListOfProducts {
+  static final ListOfProducts _listOfProducts = ListOfProducts._internal();
+  List<dynamic> cartList = [];
+  int totalCartValue = 0 ;
+
+  factory ListOfProducts() {
+
+    return _listOfProducts;
+  }
+
+  ListOfProducts._internal();
+
+  void productAdd (receivedData){
+    cartList.add(receivedData);
+    totalCartValue = totalCartValue + 1;
+    print(totalCartValue);
+
+
+
+  }
+  void productRemove (receivedData, index){
+    cartList.remove(receivedData[index]);
+    totalCartValue = totalCartValue - 1;
+    print(totalCartValue);
+  }
+  void productClearCart (){
+   totalCartValue = 0;
+   print(totalCartValue);
+  }
+}
+
+//====================================
+
+//===================================
+
 class CartPosition extends StatefulWidget {
 
   @override
@@ -13,18 +49,22 @@ class CartPositionState extends State<CartPosition> {
   @override
   Widget build(BuildContext context) {
     return new ListView.builder(
-        itemCount: 3,
+        itemCount: ListOfProducts().cartList.length,
         itemBuilder: (context, index){
           return new Card(
             child: ListTile(
-                  title: Text('Product 1',),
-                  subtitle: Text("Цена : 500000",),
-                  leading: Image.asset('assets/images/SPM-500.jpg',),
-                  trailing: Column(
-                    children: [
-                      IconButton(icon: Icon(Icons.arrow_drop_up), onPressed: null),
-                      IconButton(icon: Icon(Icons.arrow_drop_down), onPressed: null),
-                    ],
+                  title: Text(ListOfProducts().cartList[index].title),
+                  subtitle: Text("Цена : ${ListOfProducts().cartList[index].price}",),
+                  leading: Image.network(ListOfProducts().cartList[index].imageURL),
+                  trailing: Container(
+                    child: Column(
+                      children: [
+                        //IconButton(icon: Icon(Icons.arrow_drop_up), iconSize: 100.0, onPressed: null),
+                        IconButton(icon: Icon(Icons.arrow_drop_down), onPressed: (){
+                          ListOfProducts().productRemove(ListOfProducts().cartList, index);
+                        }),
+                      ],
+                    ),
                   ),
 
                   //isThreeLine: true,
