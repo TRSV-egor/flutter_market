@@ -6,6 +6,9 @@ class ListOfProducts {
   static final ListOfProducts _listOfProducts = ListOfProducts._internal();
   List<dynamic> cartList = [];
   int totalCartValue = 0 ;
+  int totalPriceValue = 0;
+
+  //int get total => cartList.length;
 
   factory ListOfProducts() {
 
@@ -16,20 +19,22 @@ class ListOfProducts {
 
   void productAdd (receivedData){
     cartList.add(receivedData);
+    totalPriceValue = totalPriceValue + receivedData.price;
     totalCartValue = totalCartValue + 1;
     print(totalCartValue);
 
-
-
   }
-  void productRemove (receivedData, index){
-    cartList.remove(receivedData[index]);
+  void productRemove (receivedData){
+    cartList.remove(receivedData);
+    totalPriceValue = totalPriceValue - receivedData.price;
     totalCartValue = totalCartValue - 1;
     print(totalCartValue);
   }
   void productClearCart (){
-   totalCartValue = 0;
-   print(totalCartValue);
+    cartList = [];
+    totalCartValue = 0;
+    totalPriceValue = 0;
+    print(totalCartValue);
   }
 }
 
@@ -61,7 +66,7 @@ class CartPositionState extends State<CartPosition> {
                       children: [
                         //IconButton(icon: Icon(Icons.arrow_drop_up), iconSize: 100.0, onPressed: null),
                         IconButton(icon: Icon(Icons.arrow_drop_down), onPressed: (){
-                          ListOfProducts().productRemove(ListOfProducts().cartList, index);
+                          ListOfProducts().productRemove(ListOfProducts().cartList[index]);
                         }),
                       ],
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_market/components/cart_position.dart';
 import 'dart:convert';
 
 //my import
@@ -66,25 +67,23 @@ class HomeScreenState extends State<HomeScreen> {
                                       child: Expanded(
                                           child: Padding(
                                             padding: EdgeInsets.all(10.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment
-                                                  .stretch,
+                                            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: [
                                                 Text(decodedPartsList[index].title,
-                                                  style: Theme
-                                                      .of(context)
-                                                      .textTheme
-                                                      .headline5,
+                                                  style: Theme.of(context).textTheme.headline5,
                                                   overflow: TextOverflow.fade,
                                                   textAlign: TextAlign.left,
                                                 ),
                                                 Divider(),
-                                                Text('${decodedPartsList[index].price} руб.',
-                                                  textAlign: TextAlign.end,
-                                                  style: Theme
-                                                      .of(context)
-                                                      .textTheme
-                                                      .bodyText1,
+                                                Row(
+                                                  children: [
+                                                    Text('${decodedPartsList[index].price} руб.',
+                                                      textAlign: TextAlign.end,
+                                                      style: Theme.of(context).textTheme.bodyText1,),
+                                                    IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: (){
+                                                      ListOfProducts().productAdd(decodedPartsList[index]);
+                                                    }),
+                                                    ],
                                                 ),
                                               ],),))
                                   )

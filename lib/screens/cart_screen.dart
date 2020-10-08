@@ -30,13 +30,19 @@ class CartScreenState extends State<CartScreen> {
             Expanded(
                 child: ListTile(
                   title: Text("Всего: ${ListOfProducts().totalCartValue}"),
-                  subtitle: Text("\$2000"),
+                  subtitle: Text("${ListOfProducts().totalPriceValue} руб."),
                 ),),
-          Expanded(
-              child: MaterialButton(onPressed: (){
-               // ListOfProducts().productRemove(ListOfProducts().cartList, index);
-                },
-                child: Text('Оплата'),
+            Expanded(
+                child: MaterialButton(
+                    color: Colors.indigoAccent,
+                    child: Icon(Icons.remove_shopping_cart),
+                    onPressed: (){ListOfProducts().productClearCart();}
+                ),
+                ),
+
+            Expanded(
+              child: MaterialButton(onPressed: (){},
+                child: Icon(Icons.account_balance_wallet_rounded),
                 color: Colors.indigoAccent,),
           )
           ],
