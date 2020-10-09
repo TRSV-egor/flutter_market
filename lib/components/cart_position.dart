@@ -18,10 +18,15 @@ class ListOfProducts {
   ListOfProducts._internal();
 
   void productAdd (receivedData){
-    cartList.add(receivedData);
-    totalPriceValue = totalPriceValue + receivedData.price;
-    totalCartValue = totalCartValue + 1;
-    print(totalCartValue);
+    if (cartList.contains(receivedData)){
+      print(Text('Already in cart!'));
+    }else{
+      cartList.add(receivedData);
+      totalPriceValue = totalPriceValue + receivedData.price;
+      totalCartValue = totalCartValue + 1;
+      print(totalCartValue);
+    };
+
 
   }
   void productRemove (receivedData){

@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
   splashscreen:
+  scoped_model: ^1.0.1
+
 
 
 
