@@ -2,89 +2,40 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
+
 class ListOfProducts {
-  static final ListOfProducts _listOfProducts = ListOfProducts._internal();
-  List<dynamic> cartList = [];
-  int totalCartValue = 0 ;
+  //Singleton
+  static final ListOfProducts _singleton = ListOfProducts._internal();
+  factory ListOfProducts() => _singleton;
+  ListOfProducts._internal();
+  static ListOfProducts get shared => _singleton;
+  //Singleton
+
+  List<dynamic> addedProductsList = [];
   int totalPriceValue = 0;
 
-  //int get total => cartList.length;
-
-  factory ListOfProducts() {
-
-    return _listOfProducts;
-  }
-
-  ListOfProducts._internal();
-
-  void productAdd (receivedData){
-    if (cartList.contains(receivedData)){
-      print(Text('Already in cart!'));
+  void productAdd(receivedData, index) {
+    if (addedProductsList.contains(receivedData)){
+      print("already in cart");
+      print(_singleton.addedProductsList[index].balance);
+      _singleton.addedProductsList.insert(index, 50);
+      //_singleton.addedProductsList[index].balance = _singleton.addedProductsList[index].balance +1;
+      print(_singleton.addedProductsList[index].balance);
     }else{
-      cartList.add(receivedData);
-      totalPriceValue = totalPriceValue + receivedData.price;
-      totalCartValue = totalCartValue + 1;
-      print(totalCartValue);
-    };
-
-
+      addedProductsList.add(receivedData);
+      totalPriceValue = totalPriceValue + 1;
+    }
   }
+
   void productRemove (receivedData){
-    cartList.remove(receivedData);
+    addedProductsList.remove(receivedData);
     totalPriceValue = totalPriceValue - receivedData.price;
-    totalCartValue = totalCartValue - 1;
-    print(totalCartValue);
   }
+
   void productClearCart (){
-    cartList = [];
-    totalCartValue = 0;
+    addedProductsList = [];
     totalPriceValue = 0;
-    print(totalCartValue);
-  }
-}
+   }
 
-//====================================
-
-//===================================
-
-class CartPosition extends StatefulWidget {
-
-  @override
-  CartPositionState createState() => CartPositionState();
-
-}
-
-class CartPositionState extends State<CartPosition> {
-
-  @override
-  Widget build(BuildContext context) {
-    return new ListView.builder(
-        itemCount: ListOfProducts().cartList.length,
-        itemBuilder: (context, index){
-          return new Card(
-            child: ListTile(
-                  title: Text(ListOfProducts().cartList[index].title),
-                  subtitle: Text("Цена : ${ListOfProducts().cartList[index].price}",),
-                  leading: Image.network(ListOfProducts().cartList[index].imageURL),
-                  trailing: Container(
-                    child: Column(
-                      children: [
-                        //IconButton(icon: Icon(Icons.arrow_drop_up), iconSize: 100.0, onPressed: null),
-                        IconButton(icon: Icon(Icons.arrow_drop_down), onPressed: (){
-                          ListOfProducts().productRemove(ListOfProducts().cartList[index]);
-                        }),
-                      ],
-                    ),
-                  ),
-
-                  //isThreeLine: true,
-                  //dense: true,
-            ),
-
-
-          );
-        },
-    );
   }
 
-}

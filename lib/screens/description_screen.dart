@@ -64,9 +64,7 @@ class DescriptionScreen extends StatelessWidget {
                             child: Text('Вернуться'),
                           ),
                           RaisedButton(
-                            onPressed: (){
-                              ListOfProducts().productAdd(dataFromJSON);
-                            },
+                            onPressed: (){},
                             child: const Text('В корзину'),
                           )
                         ],

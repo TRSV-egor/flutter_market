@@ -81,7 +81,7 @@ class HomeScreenState extends State<HomeScreen> {
                                                       textAlign: TextAlign.end,
                                                       style: Theme.of(context).textTheme.bodyText1,),
                                                     IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: (){
-                                                      ListOfProducts().productAdd(decodedPartsList[index]);
+                                                       ListOfProducts.shared.productAdd(decodedPartsList[index], index);
                                                     }),
                                                     ],
                                                 ),
