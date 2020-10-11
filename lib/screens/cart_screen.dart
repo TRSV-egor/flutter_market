@@ -56,7 +56,7 @@ class CartScreenState extends State<CartScreen> {
             Expanded(
                 child: ListTile(
                   title: Text("Всего: ${ListOfProducts.shared.addedProductsList.length}"),
-                  //subtitle: Text("${ListOfProducts(context).totalPriceValue} руб."),
+                  subtitle: Text("${ListOfProducts.shared.totalPriceValue} руб."),
                 ),),
             Expanded(
                 child: MaterialButton(

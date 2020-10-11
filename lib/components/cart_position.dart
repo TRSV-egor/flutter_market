@@ -1,7 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-
 
 class ListOfProducts {
   //Singleton
@@ -18,12 +14,11 @@ class ListOfProducts {
     if (addedProductsList.contains(receivedData)){
       print("already in cart");
       print(_singleton.addedProductsList[index].balance);
-      _singleton.addedProductsList.insert(index, 50);
-      //_singleton.addedProductsList[index].balance = _singleton.addedProductsList[index].balance +1;
+      _singleton.addedProductsList[index].balance +=1;
       print(_singleton.addedProductsList[index].balance);
     }else{
       addedProductsList.add(receivedData);
-      totalPriceValue = totalPriceValue + 1;
+      totalPriceValue = totalPriceValue + receivedData.price;
     }
   }
 
