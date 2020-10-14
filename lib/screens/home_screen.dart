@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_market/components/cart_position.dart';
+import 'package:flutter_market/components/parts_in_cart.dart';
 import 'dart:convert';
 
 //my import
 import 'package:flutter_market/screens/description_screen.dart';
-import 'package:flutter_market/components/PartsList.dart';
+import 'package:flutter_market/components/parts_list.dart';
 
 
 
@@ -20,10 +20,10 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
 
-  Future<List<JSONPartsList>> getPartsListFromJSON(BuildContext context) async {
+  Future<List<Product>> getPartsListFromJSON(BuildContext context) async {
     String jsonString = await DefaultAssetBundle.of(context).loadString('assets/sparePartsList.json');
     List<dynamic> raw = jsonDecode(jsonString);
-    return raw.map((f) => JSONPartsList.fromJSON(f)).toList();
+    return raw.map((f) => Product.fromJSON(f)).toList();
   }
 
   @override
@@ -48,7 +48,7 @@ class HomeScreenState extends State<HomeScreen> {
               builder: (context, data){
                 if(data.hasData){
 
-                  List<JSONPartsList> decodedPartsList = data.data;
+                  List<Product> decodedPartsList = data.data;
 
                   return new ListView.builder(
                               itemCount: decodedPartsList.length,
@@ -81,7 +81,7 @@ class HomeScreenState extends State<HomeScreen> {
                                                       textAlign: TextAlign.end,
                                                       style: Theme.of(context).textTheme.bodyText1,),
                                                     IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: (){
-                                                       ListOfProducts.shared.productAdd(decodedPartsList[index], index);
+                                                       Cart.shared.productAdd(decodedPartsList[index], index);
                                                     }),
                                                     ],
                                                 ),
