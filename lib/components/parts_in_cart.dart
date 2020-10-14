@@ -10,14 +10,17 @@ class Cart {
 
   //Создаём пустой список с типом JSONPartsList
   List<Product> addedProducts = [];
-
+  List<ProductCartQty> addedProductsQty = [];
+  Map<Product, int> addedQty ={};
 //Добавляем товар в корзину и проверяем есть ли он в корзине
   void productAdd(receivedData, index) {
-    if (addedProducts.contains(receivedData)) {
-      print("already in cart");
-      print(_cart.addedProducts[index].balance);
+    if (
+    addedProducts.contains(receivedData)
+    ) {
+
     } else {
       addedProducts.add(receivedData);
+      //addedQty.keys.   ;
     }
   }
 
@@ -33,4 +36,18 @@ class Cart {
 
   //Ведём подсчёт общей цены в корзине
   void productRecount() {}
+}
+
+
+class ProductCartQty {
+  //Инициализация переменных
+  Product _product;
+  int _qty;
+
+
+  ProductCartQty(this._product, this._qty);
+
+  //Доступ к переменных извне
+  get product => this._product;
+  get qty => this._qty;
 }
