@@ -21,12 +21,12 @@ class CartScreenState extends State<CartScreen> {
           itemBuilder: (context, index) {
             return new Card(
               child: ListTile(
-                title: Text(Cart.shared.addedProducts[index].title),
+                title: Text(Cart.shared.addedProducts[index].product.title),
                 subtitle: Text(
-                  "Цена : ${Cart.shared.addedProducts[index].price}",
+                  "Цена : ${Cart.shared.addedProducts[index].product.price}",
                 ),
                 leading: Image.network(
-                    Cart.shared.addedProducts[index].imageURL),
+                    Cart.shared.addedProducts[index].product.imageURL),
                 trailing: Container(
                   child: Wrap(children: [
                     IconButton(
@@ -34,10 +34,10 @@ class CartScreenState extends State<CartScreen> {
                         onPressed: () {
                           setState(() {
                             Cart.shared.productAdd(
-                                Cart.shared.addedProducts[index], index);
+                                Cart.shared.addedProducts[index].product);
                           });
                         }),
-                    Text("${Cart.shared.addedProducts[index].balance}"),
+                    Text("${Cart.shared.addedProducts[index].qty}"),
                     IconButton(
                         icon: Icon(Icons.arrow_drop_down),
                         onPressed: () {
