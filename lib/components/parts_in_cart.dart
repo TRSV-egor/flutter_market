@@ -31,18 +31,8 @@ class Cart {
 //Добавляем товар в корзину и проверяем есть ли он в корзине
   void productAdd(receivedData) {
 
-
-    bool contains(CartProductQty element) {
-      for (var id in receivedData.id) {
-        if (id == element.product.id) return true;
-      }
-      return false;
-    }
-
-    print(bool);
-
-    //print(addedProducts.contains(CartProductQty(receivedData, int)));
-    if (addedProducts.contains(receivedData.id)) {
+  var contain = addedProducts.where((element) => element.product.id == receivedData.id);
+    if (contain.isNotEmpty) {
       addedProducts.forEach((position) {
         if (position.product.id == receivedData.id) {
           position._qty += 1;
@@ -55,7 +45,20 @@ class Cart {
 
   //Удаляем товар из корзины, проверяя наличие позиции в корзине
   void productRemove(receivedData) {
-    addedProducts.remove(receivedData);
+
+
+      addedProducts.forEach((position) {
+        if (position.qty > 1 && position.product.id == receivedData.id) {
+          position._qty -= 1;
+        } else if (position.qty == 1 && position.product.id == receivedData.id) {
+          addedProducts.remove(CartProductQty(receivedData, 1));
+        }
+      });
+
+
+
+
+
 
   }
 

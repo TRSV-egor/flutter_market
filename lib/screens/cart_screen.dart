@@ -43,7 +43,7 @@ class CartScreenState extends State<CartScreen> {
                         onPressed: () {
                           setState(() {
                             Cart.shared.productRemove(
-                                Cart.shared.addedProducts[index]);
+                                Cart.shared.addedProducts[index].product);
                           });
                         }),
                   ]),
