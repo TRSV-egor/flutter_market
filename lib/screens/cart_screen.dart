@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 //my imports
 import 'package:flutter_market/components/cart.dart';
 
+import 'description_screen.dart';
+
 class CartScreen extends StatefulWidget {
   @override
   CartScreenState createState() => CartScreenState();
@@ -19,50 +21,41 @@ class CartScreenState extends State<CartScreen> {
       body: ListView.builder(
           itemCount: Cart.shared.addedProducts.length,
           itemBuilder: (context, index) {
-            return new Card(
-                child: Container(
-              height: 80,
-              child: Row(
-                children: [
-                  FittedBox(
-                    child: Image.network(
-                        Cart.shared.addedProducts[index].product.imageURL),
-                    fit: BoxFit.contain,
-                  ),
-                  Column(
-                    children: [
-                      Text(Cart.shared.addedProducts[index].product.title),
-                      Text(
-                          "Цена : ${Cart.shared.addedProducts[index].product.price}"),
-                    ],
-                  ),
-                  Container(
-                    child: Column(
+            return GestureDetector(
+                onTap:() =>  Navigator.push(context,MaterialPageRoute(builder: (context)=> DescriptionScreen(product: Cart.shared.addedProducts[index].product,))),
+            child: new Card(
+              child: ListTile(
+                title: Text(Cart.shared.addedProducts[index].product.title),
+                subtitle: Text(
+                  "Цена : ${Cart.shared.addedProducts[index].product.price}",
+                ),
+                leading: Image.network(
+                    Cart.shared.addedProducts[index].product.imageURL),
+                trailing: Container(
+                  child: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                    IconButton(
-icon: Icon(Icons.arrow_drop_up),
-onPressed: () {
-setState(() {
-Cart.shared.productAdd(
-Cart.shared.addedProducts[index].product);
-});
-}),
-
-                        Text("${Cart.shared.addedProducts[index].qty}",),
-
-
                         IconButton(
-                            icon: Icon(Icons.arrow_drop_down),
+                            icon: Icon(Icons.remove, color: Colors.red),
                             onPressed: () {
                               setState(() {
                                 Cart.shared.productRemove(
                                     Cart.shared.addedProducts[index].product);
                               });
                             }),
-                      ],
-                    ),
-                  )
-                ],
+                        Text(
+                          "${Cart.shared.addedProducts[index].qty}",
+                        ),
+                        IconButton(
+                            icon: Icon(Icons.add, color: Colors.green),
+                            onPressed: () {
+                              setState(() {
+                                Cart.shared.productAdd(
+                                    Cart.shared.addedProducts[index].product);
+                              });
+                            }),
+                      ]),
+                ),
               ),
             ));
           }),
@@ -114,33 +107,3 @@ Cart.shared.addedProducts[index].product);
     );
   }
 }
-
-// ListTile(
-// title: Text(Cart.shared.addedProducts[index].product.title),
-// subtitle: Text(
-// "Цена : ${Cart.shared.addedProducts[index].product.price}",
-// ),
-// leading: Image.network(
-// Cart.shared.addedProducts[index].product.imageURL),
-// trailing: Container(
-// child: Wrap(children: [
-// IconButton(
-// icon: Icon(Icons.arrow_drop_up),
-// onPressed: () {
-// setState(() {
-// Cart.shared.productAdd(
-// Cart.shared.addedProducts[index].product);
-// });
-// }),
-// Text("${Cart.shared.addedProducts[index].qty}", style: Theme.of(context).textTheme.headline4,),
-// IconButton(
-// icon: Icon(Icons.arrow_drop_down),
-// onPressed: () {
-// setState(() {
-// Cart.shared.productRemove(
-// Cart.shared.addedProducts[index].product);
-// });
-// }),
-// ]),
-// ),
-// ),

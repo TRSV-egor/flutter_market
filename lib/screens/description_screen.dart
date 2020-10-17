@@ -65,7 +65,8 @@ class DescriptionScreen extends StatelessWidget {
                           ),
                           RaisedButton(
                             onPressed: (){
-                                Cart.shared.productAdd(product);
+
+                              Cart.shared.productAdd(product);
                             },
                             child: const Text('В корзину'),
                           )
