@@ -12,7 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
+      //Отключение надписи дэбаг
       debugShowCheckedModeBanner: false,
+
+      //Настройка темы
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         buttonColor: Colors.indigoAccent,
@@ -20,7 +24,11 @@ class MyApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
+
+      //Инициализация стартового пути
       initialRoute: '/splash',
+
+      //Инициализация путей других экранов
       routes: {
         '/splash':(BuildContext context) => WelcomeScreen(),
         '/home':(BuildContext context) => HomeScreen(),
@@ -32,7 +40,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
+//Экран приветствия
 class WelcomeScreen extends StatefulWidget {
   @override
   WelcomeScreenState createState() => new WelcomeScreenState();
@@ -41,12 +49,13 @@ class WelcomeScreen extends StatefulWidget {
 class WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
+    //Всплывающий экран и ео настройки
     return SplashScreen(
-      seconds: 2,
+      seconds: 1,
       navigateAfterSeconds: new HomeScreen(),
       title: new Text('Buy parts smarter',
         style: Theme.of(context).textTheme.headline5,),
-      image: new Image.asset('assets/images/SPM-500.jpg', height: 150, width: 150,),
+      image: new Image.asset('assets/images/SPM-500.jpg', height: 500, width: 500,),
       loadingText: Text("Just a sec..."),
       photoSize: 100.0,
       loaderColor: Colors.indigoAccent,

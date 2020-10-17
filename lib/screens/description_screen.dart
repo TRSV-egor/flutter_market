@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_market/components/cart.dart';
 
 
 class DescriptionScreen extends StatelessWidget {
 
-  final dynamic dataFromJSON;
+  final dynamic product;
 
-  DescriptionScreen({Key key, this.dataFromJSON}) : super(key: key);
+  DescriptionScreen({Key key, this.product}) : super(key: key);
 
 
   @override
@@ -23,23 +24,23 @@ class DescriptionScreen extends StatelessWidget {
               child: SingleChildScrollView(
                   child: Column(
                 children: [
-                    Image.network(dataFromJSON.imageURL,fit: BoxFit.fitHeight,),
+                    Image.network(product.imageURL,fit: BoxFit.fitHeight,),
                     Padding(padding: EdgeInsets.all(16.0),
                       child:
                       Column(
                         children: [
-                          Text(dataFromJSON.title,
+                          Text(product.title,
                             style: Theme.of(context).textTheme.headline3),
                           Divider(),
                           Row(
                           //crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Expanded(
-                                child: Text('${dataFromJSON.price} руб.',
+                                child: Text('${product.price} руб.',
                                   style: Theme.of(context).textTheme.headline6,
                                   textAlign: TextAlign.left,),),
                               Expanded(
-                                  child: Text('${dataFromJSON.balance} шт.',
+                                  child: Text('${product.balance} шт.',
                                       style: Theme.of(context).textTheme.subtitle2,
                                       textAlign: TextAlign.right)),
                             ]
@@ -47,7 +48,7 @@ class DescriptionScreen extends StatelessWidget {
                           Divider(),
                           SizedBox(height: 16.0),
                           Wrap(children: [
-                            Text(dataFromJSON.description),
+                            Text(product.description),
                           ],)
                   ],
                 ),),
@@ -63,7 +64,9 @@ class DescriptionScreen extends StatelessWidget {
                             child: Text('Вернуться'),
                           ),
                           RaisedButton(
-                            onPressed: (){},
+                            onPressed: (){
+                                Cart.shared.productAdd(product);
+                            },
                             child: const Text('В корзину'),
                           )
                         ],
