@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //my imports
-import 'package:flutter_market/components/parts_in_cart.dart';
+import 'package:flutter_market/components/cart.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -57,8 +57,8 @@ class CartScreenState extends State<CartScreen> {
           children: [
             Expanded(
               child: ListTile(
-                title: Text("Всего: ${Cart.shared.addedProducts.length}"),
-                subtitle: Text("XXX руб."),
+                title: Text("Всего: ${Cart.shared.totalQty}"),
+                subtitle: Text("${Cart.shared.totalPrice} руб."),
               ),
             ),
             Expanded(

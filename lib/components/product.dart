@@ -1,7 +1,7 @@
 class Product {
   //Инициализация переменных
   int _id;
-  int _price;
+  double _price;
   String _title;
   String _description;
   String _imageURL;

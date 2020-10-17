@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_market/components/parts_in_cart.dart';
+import 'package:flutter_market/components/cart.dart';
 import 'dart:convert';
 
 //my import
 import 'package:flutter_market/screens/description_screen.dart';
-import 'package:flutter_market/components/parts_list.dart';
+import 'package:flutter_market/components/product.dart';
 
 
 

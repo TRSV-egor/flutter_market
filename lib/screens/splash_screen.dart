@@ -42,7 +42,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 1,
+      seconds: 2,
       navigateAfterSeconds: new HomeScreen(),
       title: new Text('Buy parts smarter',
         style: Theme.of(context).textTheme.headline5,),
