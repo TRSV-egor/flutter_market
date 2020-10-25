@@ -12,6 +12,15 @@ class CartScreen extends StatefulWidget {
 }
 
 class CartScreenState extends State<CartScreen> {
+
+  int _cartQty;
+  double _cartTotal;
+
+  void initState() {
+    // Something changed in my data source
+      setState(() {}); // Woot!
+    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +32,8 @@ class CartScreenState extends State<CartScreen> {
           itemBuilder: (context, index) {
             return GestureDetector(
                 onTap:() =>  Navigator.push(context,MaterialPageRoute(builder: (context)=> DescriptionScreen(product: Cart.shared.addedProducts[index].product,))),
-            child: new Card(
-              child: ListTile(
+              child: new Card(
+               child: ListTile(
                 title: Text(Cart.shared.addedProducts[index].product.title),
                 subtitle: Text(
                   "Цена : ${Cart.shared.addedProducts[index].product.price}",
