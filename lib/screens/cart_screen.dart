@@ -88,6 +88,7 @@ class CartScreenState extends State<CartScreen> {
               Expanded(
                 child: ListTile(
                   title: Text(
+                    //"${Cart.shared.totalQty} шт.",
                     "${Cart.shared.totalQty} шт.",
                     style: Theme.of(context).textTheme.headline6,
                     textAlign: TextAlign.center,

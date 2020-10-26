@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 //my import
 import 'package:flutter_market/components/cart.dart';
 import 'package:flutter_market/components/product.dart';
+import 'package:flutter_market/databases/DB1.dart';
 
 
 
@@ -22,7 +23,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   bool like = true;
 
   //Функция для изменения состояния лайка
-  void pressLike() {
+  void pressLike() async{
+    DB1.instance.insert({
+      DB1.columnNAME : 'widget.product.id'
+    });
     setState(() {
       like = !like;
 
@@ -32,7 +36,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text('SPM')),
+      appBar: new AppBar(title: new Text('Описание')),
       body: Container(
           constraints: BoxConstraints.expand(),
           child: SingleChildScrollView(
