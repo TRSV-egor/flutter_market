@@ -24,12 +24,12 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 
   //Функция для изменения состояния лайка
   void pressLike() async{
-    DB1.instance.insert({
-      DB1.columnNAME : 'widget.product.id'
+    int i = await  DB1.instance.insert({
+     DB1.columnNAME : 'widget.product.id'
     });
+    print('${i}');
     setState(() {
       like = !like;
-
     });
   }
 

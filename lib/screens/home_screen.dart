@@ -30,10 +30,15 @@ class HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.zero,
           children: <Widget>[
                 DrawerHeader(
-                  child: Text('SPM', textAlign: TextAlign.center, style: Theme.of(context).textTheme.headline3,),
+                  child: Container(
+                      child: Row(children:[
+                        Image.asset('assets/images/SPM-500.jpg', height: 50, width: 50,),
+                        SizedBox(width: 50.0,),
+                        Text('MENU', style: Theme.of(context).textTheme.headline3,)
+                      ])
+                  ),
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage('https://www.garicambi.com/wp-content/themes/garicambi/img/parts.png')),
-                    color: Colors.white,
+                    color: Colors.white10,
                   ),
                 ),
                 ListTile(
@@ -57,7 +62,6 @@ class HomeScreenState extends State<HomeScreen> {
                 title: Text('О приложении'),
                 leading: Icon(Icons.info),
                 onTap: () {
-
                   Navigator.pop(context);
                 },
               ),

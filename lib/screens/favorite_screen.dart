@@ -9,6 +9,11 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class FavoriteScreenState extends State<FavoriteScreen> {
+
+  _get() async{
+    List<Map<String,dynamic>> queryRow
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
