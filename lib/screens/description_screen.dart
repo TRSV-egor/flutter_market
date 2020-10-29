@@ -25,7 +25,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   //Функция для изменения состояния лайка
   void pressLike() async{
     int i = await  DB1.instance.insert({
-     DB1.columnNAME : 'widget.product.id'
+     DB1.columnTitle : 'widget.product.id'
     });
     print('${i}');
     setState(() {
