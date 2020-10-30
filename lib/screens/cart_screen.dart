@@ -13,14 +13,6 @@ class CartScreen extends StatefulWidget {
 
 class CartScreenState extends State<CartScreen> {
 
-  int _cartQty;
-  double _cartTotal;
-
-  void initState() {
-    // Something changed in my data source
-      setState(() {}); // Woot!
-    }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

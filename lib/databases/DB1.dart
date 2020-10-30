@@ -5,26 +5,26 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 
-class DB1 {
+class DatabaseHelper {
 
   static final _dbName = 'Products.db';
   static final _dbVer = 1;
-  static final _tableName = 'ProductsList';
+  static final _tableName = 'Products';
 
-
-  static final columnId = "_id";
-  static final columnPrice = "_price";
-  static final columnTitle = "_title";
-  static final columnDescription = "_description";
-  static final columnImageURL = "_imageURL";
-  static final columnBalance = "_Balance";
-  static final columnLike = "_Like";
+  static final columnMainId = "_mainId";
+  static final columnId = "id";
+  static final columnPrice = "price";
+  static final columnTitle = "title";
+  static final columnDescription = "description";
+  static final columnImageURL = "imageURL";
+  static final columnBalance = "balance";
+  static final columnLike = "like";
 
 
 
   //singleton
-  DB1._privateConstructor();
-  static final DB1 instance = DB1._privateConstructor();
+  DatabaseHelper._privateConstructor();
+  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   static Database _database;
   Future<Database> get database async {
@@ -50,7 +50,7 @@ class DB1 {
       $columnDescription TEXT NOT NULL,
       $columnImageURL TEXT NOT NULL,
       $columnBalance INTEGER,
-      $columnLike INTEGER,
+      $columnLike INTEGER
       )
       '''
     );
@@ -69,11 +69,25 @@ class DB1 {
   Future<int> update(Map<String,dynamic> row) async{
     Database db = await instance.database;
     int id = row[columnId];
-    return await db.update(_tableName, row, where: '$columnId = ?', whereArgs: [id]);
+    return await db.update(_tableName, row,
+        where: '$columnId = ?', whereArgs: [id]);
   }
+
+  
 
   Future<int> delete(int id) async{
     Database db = await instance.database;
     return await db.delete(_tableName, where:  '$columnId =?', whereArgs:  [id]);
+  }
+
+  Future<int> deleteAll() async{
+    Database db = await instance.database;
+    return await db.rawDelete("DELETE FROM $_tableName");
+  }
+  
+  search(Map<String,dynamic> row) async{
+    Database db = await instance.database;
+    int id = row[columnId];
+    return await db.rawQuery("SELECT $columnId, $columnTitle FROM $_tableName WHERE $columnId = $id");
   }
 }

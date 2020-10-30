@@ -58,6 +58,15 @@ class HomeScreenState extends State<HomeScreen> {
                   },
                 ),
 
+            ListTile(
+              title: Text('Загрузка данных'),
+              leading: Icon(Icons.system_update_alt),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/settings');
+              },
+            ),
+
               ListTile(
                 title: Text('О приложении'),
                 leading: Icon(Icons.info),

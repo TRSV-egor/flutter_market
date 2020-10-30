@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_market/screens/settings_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'favorite_screen.dart';
 import 'home_screen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/description':(BuildContext context) => DescriptionScreen(),
         '/cart':(BuildContext context) => CartScreen(),
         '/favorite':(BuildContext context) => FavoriteScreen(),
+        '/settings':(BuildContext context) => SettingsScreen(),
 
       },
     );

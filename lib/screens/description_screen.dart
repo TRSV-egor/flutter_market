@@ -24,10 +24,18 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 
   //Функция для изменения состояния лайка
   void pressLike() async{
-    int i = await  DB1.instance.insert({
-     DB1.columnTitle : 'widget.product.id'
+
+
+    await  DatabaseHelper.instance.insert({
+    DatabaseHelper.columnId : widget.product.id,
+    DatabaseHelper.columnPrice : widget.product.price,
+    DatabaseHelper.columnTitle : widget.product.title,
+    DatabaseHelper.columnDescription : widget.product.description,
+    DatabaseHelper.columnImageURL : widget.product.imageURL,
+    DatabaseHelper.columnBalance : widget.product.balance,
+    DatabaseHelper.columnLike : 1,
     });
-    print('${i}');
+    //print('${i}');
     setState(() {
       like = !like;
     });
@@ -41,16 +49,16 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
           constraints: BoxConstraints.expand(),
           child: SingleChildScrollView(
               child: Column(
-            children: [
-              Image.network(
-                widget.product.imageURL,
-                fit: BoxFit.fitHeight,
+                children: [
+                  Image.network(
+                    widget.product.imageURL,
+                    fit: BoxFit.fitHeight,
               ),
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Text(widget.product.title,
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                      Text(widget.product.title,
                         style: Theme.of(context).textTheme.headline3),
                     Divider(),
                     Row(
@@ -84,6 +92,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                   padding: EdgeInsets.all(16.0),
                   child: Wrap(
                     children: [
+                      IconButton(icon: Icon(Icons.ac_unit_outlined), onPressed: () async{
+                        List<Map<String,dynamic>> queryRows = await DatabaseHelper.instance.queryAll();
+                        print(queryRows);
+                       // print(queryRows.contains('id: ${widget.product.id}'));
+                      }),
                       IconButton(
                         icon: Icon(
                           like
