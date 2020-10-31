@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_market/components/cart.dart';
 import 'package:flutter_market/components/product.dart';
 import 'package:flutter_market/databases/DB1.dart';
+import 'package:flutter_market/screens/cart_screen.dart';
 
 
 
@@ -19,27 +20,41 @@ class DescriptionScreen extends StatefulWidget {
 }
 
 class _DescriptionScreenState extends State<DescriptionScreen> {
-  //Сюда нужно получить состояние лайка на основании Product
+
+  //bool like = checkStatus();
   bool like = true;
 
   //Функция для изменения состояния лайка
-  void pressLike() async{
+  checkStatus() async{
+    List<Map> dataFromDB  =  await DatabaseHelper.instance.search({DatabaseHelper.columnId : widget.product.id});
+    if (dataFromDB.isNotEmpty) {
+      DatabaseHelper.instance.delete(widget.product.id);
+      print('deleted');
+
+      setState(() {like = false;});
+      print(like);
+    }else{
+      await  DatabaseHelper.instance.insert({
+        DatabaseHelper.columnId : widget.product.id,
+        DatabaseHelper.columnPrice : widget.product.price,
+        DatabaseHelper.columnTitle : widget.product.title,
+        DatabaseHelper.columnDescription : widget.product.description,
+        DatabaseHelper.columnImageURL : widget.product.imageURL,
+        DatabaseHelper.columnBalance : widget.product.balance,
+        DatabaseHelper.columnLike : 1,
+      });
+      print('added');
 
 
-    await  DatabaseHelper.instance.insert({
-    DatabaseHelper.columnId : widget.product.id,
-    DatabaseHelper.columnPrice : widget.product.price,
-    DatabaseHelper.columnTitle : widget.product.title,
-    DatabaseHelper.columnDescription : widget.product.description,
-    DatabaseHelper.columnImageURL : widget.product.imageURL,
-    DatabaseHelper.columnBalance : widget.product.balance,
-    DatabaseHelper.columnLike : 1,
-    });
-    //print('${i}');
-    setState(() {
-      like = !like;
-    });
+      setState(() {like = true;});
+      print(like);
+    }
   }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +75,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                       children: [
                       Text(widget.product.title,
                         style: Theme.of(context).textTheme.headline3),
-                    Divider(),
-                    Row(
+                      Divider(),
+                      Row(
                         //crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Expanded(
@@ -76,9 +91,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   style: Theme.of(context).textTheme.subtitle2,
                                   textAlign: TextAlign.right)),
                         ]),
-                    Divider(),
-                    SizedBox(height: 16.0),
-                    Wrap(
+                      Divider(),
+                      SizedBox(height: 16.0),
+                     Wrap(
                       children: [
                         Text(widget.product.description),
                       ],
@@ -92,31 +107,33 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                   padding: EdgeInsets.all(16.0),
                   child: Wrap(
                     children: [
-                      IconButton(icon: Icon(Icons.ac_unit_outlined), onPressed: () async{
-                        List<Map<String,dynamic>> queryRows = await DatabaseHelper.instance.queryAll();
-                        print(queryRows);
-                       // print(queryRows.contains('id: ${widget.product.id}'));
+
+                      IconButton(icon: Icon(Icons.ac_unit_outlined), onPressed: () {
+                        checkStatus();
                       }),
+
                       IconButton(
                         icon: Icon(
-                          like
-                              ? Icons.favorite_border_outlined
-                              : Icons.favorite,
-                          color: like ? Colors.black38 : Colors.red,
+                          like ? Icons.favorite : Icons.favorite_border_outlined,
+                          color: like ? Colors.red : Colors.black38,
                         ),
                         onPressed: () {
-                          pressLike();
+                          checkStatus();
                         },
                       ),
+
                       FlatButton(
                         onPressed: () {
+
                           Navigator.of(context).pop();
                         },
                         child: Text('Вернуться'),
                       ),
+
                       RaisedButton(
                         onPressed: () {
-                          Cart.shared.productAdd(widget.product);
+
+                            Cart.shared.productAdd(widget.product)
 
                         },
                         child: const Text('В корзину'),

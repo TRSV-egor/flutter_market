@@ -1,5 +1,3 @@
-//import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_market/components/cart.dart';
@@ -27,8 +25,8 @@ class HomeScreenState extends State<HomeScreen> {
     return new Scaffold(
         drawer: Drawer(
             child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
+              padding: EdgeInsets.zero,
+              children: <Widget>[
                 DrawerHeader(
                   child: Container(
                       child: Row(children:[
@@ -58,22 +56,22 @@ class HomeScreenState extends State<HomeScreen> {
                   },
                 ),
 
-            ListTile(
-              title: Text('Загрузка данных'),
-              leading: Icon(Icons.system_update_alt),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/settings');
-              },
-            ),
+                ListTile(
+                  title: Text('Загрузка данных'),
+                  leading: Icon(Icons.system_update_alt),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/settings');
+                  },
+                ),
 
-              ListTile(
-                title: Text('О приложении'),
-                leading: Icon(Icons.info),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
+                ListTile(
+                  title: Text('О приложении'),
+                  leading: Icon(Icons.info),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
 
               ],
             )),
@@ -105,8 +103,8 @@ class HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DescriptionScreen(
-                                        product: decodedPartsList[index],
-                                      ))),
+                                    product: decodedPartsList[index],
+                                  ))),
                           child: Card(
                             child: new Row(children: [
                               FittedBox(
@@ -123,7 +121,7 @@ class HomeScreenState extends State<HomeScreen> {
                                           padding: EdgeInsets.all(15.0),
                                           child: Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
+                                              CrossAxisAlignment.stretch,
                                               children: [
                                                 Text(
                                                   decodedPartsList[index].title,

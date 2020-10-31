@@ -14,6 +14,12 @@ class CartScreen extends StatefulWidget {
 class CartScreenState extends State<CartScreen> {
 
   @override
+  void initState(){
+    setState(() {});
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
