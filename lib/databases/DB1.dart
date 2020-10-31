@@ -84,7 +84,9 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.rawDelete("DELETE FROM $_tableName");
   }
-  
+
+
+
   search(Map<String,dynamic> row) async{
     Database db = await instance.database;
     int id = row[columnId];

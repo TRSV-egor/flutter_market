@@ -67,9 +67,11 @@ class SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),RaisedButton(
                 onPressed: () async{
-                  var A =  await DatabaseHelper.instance.search({DatabaseHelper.columnId : 1});
-                 if (A[]){
-                  print(A);}else{print("null");}
+                  List<Map> dataFromDB  =  await DatabaseHelper.instance.search({DatabaseHelper.columnId : 1});
+                  //QueryResultSet
+                  if (dataFromDB.isEmpty)
+                    print(dataFromDB[0]['id']);
+                  print(dataFromDB[0]['title']);
                 },
                 child: Row(children: [
                   Icon(Icons.search, color: Colors.white,),
