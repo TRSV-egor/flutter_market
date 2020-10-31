@@ -133,7 +133,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                       RaisedButton(
                         onPressed: () {
 
-                            Cart.shared.productAdd(widget.product)
+                            Cart.shared.productAdd(widget.product);
 
                         },
                         child: const Text('В корзину'),
