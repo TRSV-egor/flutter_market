@@ -20,7 +20,7 @@ class DescriptionScreen extends StatefulWidget {
 
 class _DescriptionScreenState extends State<DescriptionScreen> {
 
-  //bool like = checkStatus();
+  bool like = false;
 
 
   //Функция для изменения состояния лайка и добавления\удаления записи в БД
@@ -124,7 +124,12 @@ Future<bool> check(id) async{
     bottomNavigationBar: FutureBuilder(
       future: check(widget.product.id),
       builder: (context, AsyncSnapshot<bool> snapshot){
-        widget.like = snapshot.data;
+        if (snapshot.data == null) {
+          widget.like = false;
+        }else{
+          widget.like = snapshot.data;
+        }
+
         return Container(height: 50,
         child: Align(
           alignment: Alignment.centerRight,
@@ -132,14 +137,6 @@ Future<bool> check(id) async{
             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
             child: Wrap(
               children: [
-                Text('Тестим вот это ${widget.like}'),
-
-                IconButton(
-                  icon: Icon(Icons.star),
-                  onPressed: () {
-                    //print(widget.likeChanged);
-                  },
-                ),
 
                 IconButton(
                   icon: Icon(
