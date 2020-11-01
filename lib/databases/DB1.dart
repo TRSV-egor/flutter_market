@@ -18,9 +18,6 @@ class DatabaseHelper {
   static final columnDescription = "description";
   static final columnImageURL = "imageURL";
   static final columnBalance = "balance";
-  static final columnLike = "like";
-
-
 
   //singleton
   DatabaseHelper._privateConstructor();
@@ -49,8 +46,7 @@ class DatabaseHelper {
       $columnTitle TEXT NOT NULL,
       $columnDescription TEXT NOT NULL,
       $columnImageURL TEXT NOT NULL,
-      $columnBalance INTEGER,
-      $columnLike INTEGER
+      $columnBalance INTEGER
       )
       '''
     );
@@ -73,8 +69,6 @@ class DatabaseHelper {
         where: '$columnId = ?', whereArgs: [id]);
   }
 
-  
-
   Future<int> delete(int id) async{
     Database db = await instance.database;
     return await db.delete(_tableName, where:  '$columnId =?', whereArgs:  [id]);
@@ -84,7 +78,6 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.rawDelete("DELETE FROM $_tableName");
   }
-
 
 
   search(Map<String,dynamic> row) async{

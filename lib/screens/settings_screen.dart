@@ -19,7 +19,6 @@ _loadData(context) async{
   List<Product> data = await getPartsListFromJSON(context);
   print(data);
   data.forEach((position) async{
-    //if ()
     //await DatabaseHelper.instance.search({ DatabaseHelper.columnId : position.id});
     DatabaseHelper.instance.insert({
       DatabaseHelper.columnId : position.id,
@@ -28,7 +27,6 @@ _loadData(context) async{
       DatabaseHelper.columnDescription :position.description,
       DatabaseHelper.columnImageURL : position.imageURL,
       DatabaseHelper.columnBalance : position.balance,
-      DatabaseHelper.columnLike : 1,
     });
   });
 }
@@ -41,6 +39,7 @@ class SettingsScreenState extends State<SettingsScreen> {
         body: new Container( padding: EdgeInsets.all(15.0),
           child: Column(
             children: [
+
               RaisedButton(
                 onPressed: () {
                   _loadData(context);
@@ -52,9 +51,11 @@ class SettingsScreenState extends State<SettingsScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
               ),
+
               SizedBox(
                 height: 20,
               ),
+
               RaisedButton(
                 onPressed: () {
                   DatabaseHelper.instance.deleteAll();
@@ -65,34 +66,28 @@ class SettingsScreenState extends State<SettingsScreen> {
                   Text('Удалить данные из БД')],
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
-              ),RaisedButton(
-                onPressed: () async{
-                  List<Map> dataFromDB  =  await DatabaseHelper.instance.search({DatabaseHelper.columnId : 1});
-                  //QueryResultSet
-                  if (dataFromDB.isNotEmpty) {
-                    print(dataFromDB[0]['id']);
-                  } else {
-                  print("empty : (");}
-                },
-                child: Row(children: [
-                  Icon(Icons.search, color: Colors.white,),
-                  SizedBox(width: 5,),
-                  Text('Найти в БД')],
-                  mainAxisAlignment: MainAxisAlignment.center,
-                ),
+              ),
+
+              SizedBox(
+                height: 20,
               ),
 
               // RaisedButton(
               //   onPressed: () async{
-              //     await DatabaseHelper.instance.check(1);
+              //     List<Map> dataFromDB  =  await DatabaseHelper.instance.search({DatabaseHelper.columnId : 1});
+              //     //QueryResultSet
+              //     if (dataFromDB.isNotEmpty) {
+              //       print(dataFromDB[0]['id']);
+              //     } else {
+              //     print("empty : (");}
               //   },
               //   child: Row(children: [
               //     Icon(Icons.search, color: Colors.white,),
               //     SizedBox(width: 5,),
-              //     Text('Найти')],
+              //     Text('Найти в БД')],
               //     mainAxisAlignment: MainAxisAlignment.center,
               //   ),
-              // )
+              // ),
 
             ],
           ),
