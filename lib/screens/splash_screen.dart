@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash':(BuildContext context) => WelcomeScreen(),
         '/home':(BuildContext context) => HomeScreen(),
-        '/description':(BuildContext context) => DescriptionScreen(),
+        //'/description':(BuildContext context) => DescriptionScreen(),
         '/cart':(BuildContext context) => CartScreen(),
         '/favorite':(BuildContext context) => FavoriteScreen(),
         '/settings':(BuildContext context) => SettingsScreen(),

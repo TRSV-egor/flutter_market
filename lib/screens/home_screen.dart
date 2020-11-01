@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_market/components/cart.dart';
+import 'package:flutter_market/databases/DB1.dart';
 import 'dart:convert';
 
 //my import
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+
   Future<List<Product>> getPartsListFromJSON(BuildContext context) async {
     String jsonString = await DefaultAssetBundle.of(context)
         .loadString('assets/sparePartsList.json');
@@ -102,9 +104,11 @@ class HomeScreenState extends State<HomeScreen> {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => DescriptionScreen(
+                                  builder: (context) {
+                                    return DescriptionScreen(
                                     product: decodedPartsList[index],
-                                  ))),
+                                  );
+                                  })),
                           child: Card(
                             child: new Row(children: [
                               FittedBox(

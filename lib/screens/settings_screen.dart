@@ -69,9 +69,10 @@ class SettingsScreenState extends State<SettingsScreen> {
                 onPressed: () async{
                   List<Map> dataFromDB  =  await DatabaseHelper.instance.search({DatabaseHelper.columnId : 1});
                   //QueryResultSet
-                  if (dataFromDB.isEmpty)
+                  if (dataFromDB.isNotEmpty) {
                     print(dataFromDB[0]['id']);
-                  print(dataFromDB[0]['title']);
+                  } else {
+                  print("empty : (");}
                 },
                 child: Row(children: [
                   Icon(Icons.search, color: Colors.white,),
@@ -79,7 +80,20 @@ class SettingsScreenState extends State<SettingsScreen> {
                   Text('Найти в БД')],
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
-              )
+              ),
+
+              // RaisedButton(
+              //   onPressed: () async{
+              //     await DatabaseHelper.instance.check(1);
+              //   },
+              //   child: Row(children: [
+              //     Icon(Icons.search, color: Colors.white,),
+              //     SizedBox(width: 5,),
+              //     Text('Найти')],
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //   ),
+              // )
+
             ],
           ),
         ));

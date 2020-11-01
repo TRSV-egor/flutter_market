@@ -7,17 +7,13 @@ import 'package:flutter_market/components/cart.dart';
 import 'description_screen.dart';
 
 class CartScreen extends StatefulWidget {
+
   @override
   CartScreenState createState() => CartScreenState();
 }
 
 class CartScreenState extends State<CartScreen> {
 
-  @override
-  void initState(){
-    setState(() {});
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

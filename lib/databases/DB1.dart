@@ -40,7 +40,7 @@ class DatabaseHelper {
     return await openDatabase(path, version: _dbVer, onCreate: _onCreate);
   }
 
-  Future _onCreate(Database db, int ver){
+  Future _onCreate(Database db, int ver) async{
     db.execute(
       '''
       CREATE TABLE $_tableName (
@@ -90,6 +90,7 @@ class DatabaseHelper {
   search(Map<String,dynamic> row) async{
     Database db = await instance.database;
     int id = row[columnId];
-    return await db.rawQuery("SELECT $columnId, $columnTitle FROM $_tableName WHERE $columnId = $id");
+    return await db.rawQuery("SELECT $columnId FROM $_tableName WHERE $columnId = $id");
   }
+
 }

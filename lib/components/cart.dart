@@ -1,6 +1,6 @@
 //my imports
 import 'package:flutter_market/components/product.dart';
-import 'package:flutter_market/screens/cart_screen.dart';
+
 
 //Класс корзины
 class Cart {
