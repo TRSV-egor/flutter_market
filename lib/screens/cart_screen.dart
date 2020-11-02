@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 //my imports
 import 'package:flutter_market/components/cart.dart';
-
-import 'description_screen.dart';
+import 'package:flutter_market/screens/description_screen.dart';
 
 class CartScreen extends StatefulWidget {
 
   @override
   CartScreenState createState() => CartScreenState();
+
 }
 
 class CartScreenState extends State<CartScreen> {
 
+  //Получить общую сумму корзины
   _totalPrice (){
     double a = 0.0;
     Cart.shared.addedProducts.forEach((element) {
@@ -22,6 +22,7 @@ class CartScreenState extends State<CartScreen> {
     return a;
   }
 
+  //Получить общее количество
   _totalValue (){
     int b = 0;
     Cart.shared.addedProducts.forEach((element) {
@@ -41,7 +42,9 @@ class CartScreenState extends State<CartScreen> {
           itemCount: Cart.shared.addedProducts.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-                onTap:() =>  Navigator.push(context,MaterialPageRoute(builder: (context)=> DescriptionScreen(product: Cart.shared.addedProducts[index].product,))),
+                onTap:() =>  Navigator.push(context,MaterialPageRoute(
+                    builder: (context)=> DescriptionScreen(
+                      product: Cart.shared.addedProducts[index].product,))),
               child: new Card(
                child: ListTile(
                 title: Text(Cart.shared.addedProducts[index].product.title),

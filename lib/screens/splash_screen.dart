@@ -55,7 +55,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     //Всплывающий экран и ео настройки
     return SplashScreen(
-      seconds: 1,
+      seconds: 5,
       navigateAfterSeconds: new HomeScreen(),
       title: new Text('Buy parts smarter',
         style: Theme.of(context).textTheme.headline5,),

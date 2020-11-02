@@ -26,8 +26,6 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
   static Database _database;
 
-  //Асинхронные функции
-
   //Получение базы данных
   Future<Database> get database async {
     if(_database!=null) return _database;

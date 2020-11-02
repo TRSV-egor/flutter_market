@@ -72,6 +72,25 @@ class HomeScreenState extends State<HomeScreen> {
                   leading: Icon(Icons.info),
                   onTap: () {
                     Navigator.pop(context);
+                    showDialog(context: context,
+                    builder: (_) => AlertDialog(
+                      title: new Text("О программе", textAlign: TextAlign.center,),
+                      content: Container(
+                        child: Column(children:[
+                          Text("Тестовое приложение"),
+                          SizedBox(height: 15,),
+                          Image.network('https://sntch.com/uploads/2018/12/anons-1.jpg',)
+                        ]),
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text('Продолжить'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    ));
                   },
                 ),
 
