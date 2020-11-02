@@ -14,6 +14,22 @@ class CartScreen extends StatefulWidget {
 
 class CartScreenState extends State<CartScreen> {
 
+  _totalPrice (){
+    double a = 0.0;
+    Cart.shared.addedProducts.forEach((element) {
+      a += element.product.price * element.qty;
+    });
+    return a;
+  }
+
+  _totalValue (){
+    int b = 0;
+    Cart.shared.addedProducts.forEach((element) {
+      b += element.qty;
+    });
+    return b;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,12 +99,12 @@ class CartScreenState extends State<CartScreen> {
                 child: ListTile(
                   title: Text(
                     //"${Cart.shared.totalQty} шт.",
-                    "${Cart.shared.totalQty} шт.",
+                    "${_totalValue()} шт.",
                     style: Theme.of(context).textTheme.headline6,
                     textAlign: TextAlign.center,
                   ),
                   subtitle: Text(
-                    "${Cart.shared.totalPrice} руб.",
+                    "${_totalPrice()} руб.",
                     style: Theme.of(context).textTheme.subtitle2,
                     textAlign: TextAlign.center,
                   ),

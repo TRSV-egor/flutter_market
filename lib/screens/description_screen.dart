@@ -23,7 +23,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   //Функция для изменения состояния лайка и добавления\удаления записи в БД
   pressLike() async {
     List<Map> dataFromDB = await DatabaseHelper.instance
-        .search({DatabaseHelper.columnId: widget.product.id});
+        .query({DatabaseHelper.columnId: widget.product.id});
     if (dataFromDB.isNotEmpty) {
       DatabaseHelper.instance.delete(widget.product.id);
       print('deleted');
@@ -51,7 +51,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 
   Future<bool> check(id) async {
     List<Map> dataFromDB =
-        await DatabaseHelper.instance.search({DatabaseHelper.columnId: id});
+        await DatabaseHelper.instance.query({DatabaseHelper.columnId: id});
     if (dataFromDB.isNotEmpty) {
       print('1');
       return true;

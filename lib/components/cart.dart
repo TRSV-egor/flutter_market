@@ -1,7 +1,6 @@
 //my imports
 import 'package:flutter_market/components/product.dart';
 
-
 //Класс корзины
 class Cart {
   //Singleton
@@ -12,10 +11,6 @@ class Cart {
 
   //Создаём пустой список с типом CartProductQty
   List<CartProduct> addedProducts = [];
-
-  //Общее количество и сумма
-  double totalPrice = 0.00;
-  int totalQty = 0;
 
 //Добавляем товар в корзину и проверяем есть ли он в корзине
   void productAdd(product) {
@@ -30,7 +25,6 @@ class Cart {
     } else {
       addedProducts.add(CartProduct(product, 1));
     }
-    productRecount();
   }
 
   //Удаляем товар из корзины, проверяя наличие позиции в корзине
@@ -44,23 +38,11 @@ class Cart {
       }
     });
     addedProducts.removeWhere((position) => toDelete.contains(position));
-    productRecount();
   }
 
   //Очищаем корзину полностью
   void productClearCart() {
     addedProducts = [];
-    productRecount();
-  }
-
-  //Ведём подсчёт общей цены в корзине
-  void productRecount() {
-    totalPrice = 0;
-    totalQty = 0;
-    addedProducts.forEach((element) {
-      totalPrice += element.product.price * element.qty;
-      totalQty += element._qty;
-    });
   }
 }
 
