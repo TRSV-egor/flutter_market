@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_market/components/cart.dart';
-import 'package:flutter_market/databases/DB1.dart';
 import 'dart:convert';
 
 //my import
@@ -34,11 +33,11 @@ class HomeScreenState extends State<HomeScreen> {
                       child: Row(children:[
                         Image.asset('assets/images/SPM-500.jpg', height: 50, width: 50,),
                         SizedBox(width: 50.0,),
-                        Text('MENU', style: Theme.of(context).textTheme.headline3,)
+                        Expanded(child: Text('SPARE PARTS MARKET', style: Theme.of(context).textTheme.headline4,))
                       ])
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white10,
+                    color: Colors.indigo,
                   ),
                 ),
                 ListTile(
@@ -97,7 +96,7 @@ class HomeScreenState extends State<HomeScreen> {
               ],
             )),
         appBar: new AppBar(
-          title: new Text('SPM - Spare Parts Market'),
+          title: new Text('Лучшие предложения'),
           actions: <Widget>[
             IconButton(
                 icon: Icon(

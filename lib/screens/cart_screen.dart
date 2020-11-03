@@ -13,6 +13,13 @@ class CartScreen extends StatefulWidget {
 
 class CartScreenState extends State<CartScreen> {
 
+  @override
+  void initState() {
+    super.initState();
+      setState(() {
+      });
+   }
+
   //Получить общую сумму корзины
   _totalPrice (){
     double a = 0.0;

@@ -7,9 +7,9 @@ import 'package:flutter_market/components/cart.dart';
 import 'package:flutter_market/components/product.dart';
 import 'package:flutter_market/databases/DB1.dart';
 
+
 class DescriptionScreen extends StatefulWidget {
   final Product product;
-  bool like = false;
 
   DescriptionScreen({Key key, @required this.product}) : super(key: key);
 
@@ -29,9 +29,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
       print('deleted');
 
       setState(() {
-        widget.like = false;
+        like = false;
       });
-      print(widget.like);
+      print(like);
     } else {
       await DatabaseHelper.instance.insert({
         DatabaseHelper.columnId: widget.product.id,
@@ -43,9 +43,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
       });
       print('added');
       setState(() {
-        widget.like = true;
+        like = true;
       });
-      print(widget.like);
+      print(like);
     }
   }
 
@@ -112,9 +112,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
         future: check(widget.product.id),
         builder: (context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.data == null) {
-            widget.like = false;
+            like = false;
           } else {
-            widget.like = snapshot.data;
+            like = snapshot.data;
           }
 
           return Container(
@@ -127,10 +127,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                   children: [
                     IconButton(
                       icon: Icon(
-                        widget.like
+                        like
                             ? Icons.favorite
                             : Icons.favorite_border_outlined,
-                        color: widget.like ? Colors.red : Colors.black38,
+                        color: like ? Colors.red : Colors.black38,
                       ),
                       onPressed: () {
                         pressLike();

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_market/screens/settings_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
+//my imports
+import 'settings_screen.dart';
 import 'favorite_screen.dart';
 import 'home_screen.dart';
-import 'description_screen.dart';
 import 'cart_screen.dart';
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp();
@@ -34,7 +32,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash':(BuildContext context) => WelcomeScreen(),
         '/home':(BuildContext context) => HomeScreen(),
-        //'/description':(BuildContext context) => DescriptionScreen(),
+        // '/description':(BuildContext context) => DescriptionScreen(),
         '/cart':(BuildContext context) => CartScreen(),
         '/favorite':(BuildContext context) => FavoriteScreen(),
         '/settings':(BuildContext context) => SettingsScreen(),

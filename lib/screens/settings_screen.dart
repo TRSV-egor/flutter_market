@@ -5,33 +5,32 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_market/components/product.dart';
 import 'package:flutter_market/databases/DB1.dart';
 
-class SettingsScreen extends StatefulWidget {
-  @override
-  SettingsScreenState createState() => SettingsScreenState();
-}
+
+
+class SettingsScreen extends StatelessWidget {
+
   Future<List<Product>> getPartsListFromJSON(BuildContext context) async {
     String jsonString = await DefaultAssetBundle.of(context).loadString('assets/sparePartsList.json');
     List<dynamic> raw = jsonDecode(jsonString);
     return raw.map((f) => Product.fromJSON(f)).toList();
   }
 
-_loadData(context) async{
+_loadData(context) async {
   List<Product> data = await getPartsListFromJSON(context);
   print(data);
-  data.forEach((position) async{
+  data.forEach((position) async {
     //await DatabaseHelper.instance.search({ DatabaseHelper.columnId : position.id});
     DatabaseHelper.instance.insert({
-      DatabaseHelper.columnId : position.id,
-      DatabaseHelper.columnPrice : position.price,
-      DatabaseHelper.columnTitle : position.title,
-      DatabaseHelper.columnDescription :position.description,
-      DatabaseHelper.columnImageURL : position.imageURL,
-      DatabaseHelper.columnBalance : position.balance,
+      DatabaseHelper.columnId: position.id,
+      DatabaseHelper.columnPrice: position.price,
+      DatabaseHelper.columnTitle: position.title,
+      DatabaseHelper.columnDescription: position.description,
+      DatabaseHelper.columnImageURL: position.imageURL,
+      DatabaseHelper.columnBalance: position.balance,
     });
   });
 }
 
-class SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,26 +70,9 @@ class SettingsScreenState extends State<SettingsScreen> {
               SizedBox(
                 height: 20,
               ),
-
-              // RaisedButton(
-              //   onPressed: () async{
-              //     List<Map> dataFromDB  =  await DatabaseHelper.instance.search({DatabaseHelper.columnId : 1});
-              //     //QueryResultSet
-              //     if (dataFromDB.isNotEmpty) {
-              //       print(dataFromDB[0]['id']);
-              //     } else {
-              //     print("empty : (");}
-              //   },
-              //   child: Row(children: [
-              //     Icon(Icons.search, color: Colors.white,),
-              //     SizedBox(width: 5,),
-              //     Text('Найти в БД')],
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //   ),
-              // ),
-
             ],
           ),
         ));
   }
 }
+
