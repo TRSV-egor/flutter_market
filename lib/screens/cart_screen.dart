@@ -13,13 +13,6 @@ class CartScreen extends StatefulWidget {
 
 class CartScreenState extends State<CartScreen> {
 
-  @override
-  void initState() {
-    super.initState();
-      setState(() {
-      });
-   }
-
   //Получить общую сумму корзины
   _totalPrice (){
     double a = 0.0;
@@ -49,9 +42,12 @@ class CartScreenState extends State<CartScreen> {
           itemCount: Cart.shared.addedProducts.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-                onTap:() =>  Navigator.push(context,MaterialPageRoute(
+                onTap:() {
+                  //Navigator.of(context).pop();
+                  return Navigator.push(context,MaterialPageRoute(
                     builder: (context)=> DescriptionScreen(
-                      product: Cart.shared.addedProducts[index].product,))),
+                      product: Cart.shared.addedProducts[index].product, callback: () => setState((){}),)));
+                },
               child: new Card(
                child: ListTile(
                 title: Text(Cart.shared.addedProducts[index].product.title),

@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+//my imports
 import 'package:flutter_market/components/product.dart';
 import 'package:flutter_market/databases/DB1.dart';
 
@@ -9,17 +9,17 @@ import 'package:flutter_market/databases/DB1.dart';
 
 class SettingsScreen extends StatelessWidget {
 
+  //Получаем список товаров из json в List<Product>
   Future<List<Product>> getPartsListFromJSON(BuildContext context) async {
     String jsonString = await DefaultAssetBundle.of(context).loadString('assets/sparePartsList.json');
     List<dynamic> raw = jsonDecode(jsonString);
     return raw.map((f) => Product.fromJSON(f)).toList();
   }
-
+//Загружаем данные из List<Product> (json) в базу даных
 _loadData(context) async {
   List<Product> data = await getPartsListFromJSON(context);
   print(data);
   data.forEach((position) async {
-    //await DatabaseHelper.instance.search({ DatabaseHelper.columnId : position.id});
     DatabaseHelper.instance.insert({
       DatabaseHelper.columnId: position.id,
       DatabaseHelper.columnPrice: position.price,
@@ -66,7 +66,6 @@ _loadData(context) async {
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
               ),
-
               SizedBox(
                 height: 20,
               ),

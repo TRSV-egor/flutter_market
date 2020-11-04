@@ -10,8 +10,9 @@ import 'package:flutter_market/databases/DB1.dart';
 
 class DescriptionScreen extends StatefulWidget {
   final Product product;
+  final VoidCallback callback;
 
-  DescriptionScreen({Key key, @required this.product}) : super(key: key);
+  DescriptionScreen({Key key, @required this.product, this.callback}) : super(key: key);
 
   @override
   _DescriptionScreenState createState() => _DescriptionScreenState();
@@ -145,6 +146,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                     RaisedButton(
                       onPressed: () {
                         Cart.shared.productAdd(widget.product);
+                        widget.callback();
                       },
                       child: const Text('В корзину'),
                     )

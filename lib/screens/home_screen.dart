@@ -99,8 +99,7 @@ class HomeScreenState extends State<HomeScreen> {
           title: new Text('Лучшие предложения'),
           actions: <Widget>[
             IconButton(
-                icon: Icon(
-                  Icons.shopping_cart,
+                icon: Icon(Icons.shopping_cart,
                   color: Colors.white,
                 ),
                 onPressed: () {
@@ -163,10 +162,13 @@ class HomeScreenState extends State<HomeScreen> {
                                                 ),
                                               ])))),
                               IconButton(
-                                  icon: Icon(Icons.add_shopping_cart),
+                                  icon: Icon(Icons.add_shopping_cart,
+                                   color: Colors.indigoAccent,
+                                  ),
                                   onPressed: () {
-                                    Cart.shared
-                                        .productAdd(decodedPartsList[index]);
+                                    setState(() {
+                                      Cart.shared.productAdd(decodedPartsList[index]);
+                                    });
                                   }),
                             ]),
                           ),

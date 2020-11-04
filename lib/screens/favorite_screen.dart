@@ -9,9 +9,9 @@ class FavoriteScreen extends StatefulWidget {
 
 class FavoriteScreenState extends State<FavoriteScreen> {
 
+  //Получаем содержимое БД
   _get() async{
     List<Map<String,dynamic>> queryRow = await DatabaseHelper.instance.queryAll();
-    print(queryRow);
     return queryRow;
   }
 
