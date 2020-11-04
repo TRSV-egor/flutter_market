@@ -14,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
 
+
+
   Future<List<Product>> getPartsListFromJSON(BuildContext context) async {
     String jsonString = await DefaultAssetBundle.of(context)
         .loadString('assets/sparePartsList.json');
@@ -24,88 +26,68 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        drawer: Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                DrawerHeader(
-                  child: Container(
-                      child: Row(children:[
-                        Image.asset('assets/images/SPM-500.jpg', height: 50, width: 50,),
-                        SizedBox(width: 50.0,),
-                        Expanded(child: Text('SPARE PARTS MARKET', style: Theme.of(context).textTheme.headline4,))
-                      ])
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.indigo,
-                  ),
-                ),
-                ListTile(
-                  title: Text('Избранное'),
-                  leading: Icon(Icons.favorite),
-                  onTap: () {Navigator.pop(context);
-                  Navigator.pushNamed(context, '/favorite');
-                  },
-                ),
+        //drawer: Drawer(
+            // child: ListView(
+            //   padding: EdgeInsets.zero,
+            //   children: <Widget>[
+                // DrawerHeader(
+                //   child: Container(
+                //       child: Row(children:[
+                //         Image.asset('assets/images/SPM-500.jpg', height: 50, width: 50,),
+                //         SizedBox(width: 50.0,),
+                //         Expanded(child: Text('SPARE PARTS MARKET', style: Theme.of(context).textTheme.headline4,))
+                //       ])
+                //   ),
+                //   decoration: BoxDecoration(
+                //     color: Colors.indigo,
+                //   ),
+                // ),
 
-                ListTile(
-                  title: Text('Корзина'),
-                  leading: Icon(Icons.shopping_cart),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '/cart');
-                  },
-                ),
+                // ListTile(
+                //   title: Text('О приложении'),
+                //   leading: Icon(Icons.info),
+                //   onTap: () {
+                //     Navigator.pop(context);
+                //     showDialog(context: context,
+                //         builder: (_) => AlertDialog(
+                //           title: new Text("О программе",
+                //             textAlign: TextAlign.center,
+                //             style: Theme.of(context).textTheme.headline4,),
+                //           content: Container(height: 200,
+                //             color: Colors.red,
+                //             alignment: Alignment.center,
+                //             child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                //               children:[
+                //               Text("Тестовое приложение Flutter"),
+                //               SizedBox(height: 15,),
+                //               Image.network('https://sntch.com/uploads/2018/12/anons-1.jpg',fit: BoxFit.cover,)
+                //             ],),
+                //           ),
+                //           actions: <Widget>[
+                //             FlatButton(
+                //               child: Text('Продолжить'),
+                //               onPressed: () {
+                //                 Navigator.of(context).pop();
+                //               },
+                //             )
+                //           ],
+                //         ));
+                //   },
+                // ),
 
-                ListTile(
-                  title: Text('Загрузка данных'),
-                  leading: Icon(Icons.system_update_alt),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '/settings');
-                  },
-                ),
-
-                ListTile(
-                  title: Text('О приложении'),
-                  leading: Icon(Icons.info),
-                  onTap: () {
-                    Navigator.pop(context);
-                    showDialog(context: context,
-                    builder: (_) => AlertDialog(
-                      title: new Text("О программе", textAlign: TextAlign.center,),
-                      content: Container(
-                        child: Column(children:[
-                          Text("Тестовое приложение"),
-                          SizedBox(height: 15,),
-                          Image.network('https://sntch.com/uploads/2018/12/anons-1.jpg',)
-                        ]),
-                      ),
-                      actions: <Widget>[
-                        FlatButton(
-                          child: Text('Продолжить'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        )
-                      ],
-                    ));
-                  },
-                ),
-
-              ],
-            )),
+            //   ],
+            // )),
         appBar: new AppBar(
-          title: new Text('Лучшие предложения'),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.shopping_cart,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/cart');
-                })
-          ],
+          title: new Text('Лучшие предложения', ),
+          // actions: <Widget>[
+          //   IconButton(
+          //       icon: Icon(Icons.shopping_cart,
+          //         color: Colors.white,
+          //       ),
+          //       onPressed: () {
+          //         Navigator.pushNamed(context, '/cart');
+          //       })
+          // ],
         ),
         body: new Container(
           child: FutureBuilder(
@@ -180,6 +162,21 @@ class HomeScreenState extends State<HomeScreen> {
                   );
                 }
               }),
-        ));
+        ),
+      bottomNavigationBar: new Container(
+        height: 60,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(icon: Icon(Icons.favorite_border_outlined),tooltip: "Открыть ""Избранное""", onPressed: (){Navigator.pushNamed(context, '/favorite');}),
+            IconButton(icon: Icon(Icons.shopping_cart_outlined), tooltip: "Открыть ""Корзину""", onPressed: (){Navigator.pushNamed(context, '/cart');}),
+            IconButton(icon: Icon(Icons.settings_outlined),tooltip: "Открыть ""Настройки""", onPressed: () {Navigator.pushNamed(context, '/settings');}),
+
+          ],),
+        
+      ),
+    
+    );
+    
   }
 }

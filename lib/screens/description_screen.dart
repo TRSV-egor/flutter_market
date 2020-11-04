@@ -133,6 +133,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                             : Icons.favorite_border_outlined,
                         color: like ? Colors.red : Colors.black38,
                       ),
+                      alignment: Alignment.centerLeft,
                       onPressed: () {
                         pressLike();
                       },

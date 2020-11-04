@@ -69,6 +69,41 @@ _loadData(context) async {
               SizedBox(
                 height: 20,
               ),
+
+              RaisedButton(
+                onPressed: () {
+                  showDialog(context: context,
+                              builder: (_) => AlertDialog(
+                                title: new Text("О программе",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline4,),
+                                content: Container(width: 300,
+                                  height: 50,
+                                  alignment: Alignment.center,
+                                  child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                                    children:[
+                                    Text("Тестовое приложение Flutter"),
+                                    SizedBox(height: 15,),
+                                    //Image.network('https://sntch.com/uploads/2018/12/anons-1.jpg',fit: BoxFit.cover,)
+                                  ],),
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('Продолжить'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  )
+                                ],
+                              ));
+                },
+                child: Row(children: [
+                  Icon(Icons.info_outline, color: Colors.white10,),
+                  SizedBox(width: 5,),
+                  Text('О программе')],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+              ),
             ],
           ),
         ));
