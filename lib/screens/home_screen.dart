@@ -79,15 +79,6 @@ class HomeScreenState extends State<HomeScreen> {
             // )),
         appBar: new AppBar(
           title: new Text('Лучшие предложения', ),
-          // actions: <Widget>[
-          //   IconButton(
-          //       icon: Icon(Icons.shopping_cart,
-          //         color: Colors.white,
-          //       ),
-          //       onPressed: () {
-          //         Navigator.pushNamed(context, '/cart');
-          //       })
-          // ],
         ),
         body: new Container(
           child: FutureBuilder(
