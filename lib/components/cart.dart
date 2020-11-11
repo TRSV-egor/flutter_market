@@ -15,7 +15,7 @@ class Cart {
 //Добавляем товар в корзину и проверяем есть ли он в корзине
   void productAdd(product) {
     var contain =
-        addedProducts.where((element) => element.product.id == product.id);
+    addedProducts.where((element) => element.product.id == product.id);
     if (contain.isNotEmpty) {
       addedProducts.forEach((position) {
         if (position.product.id == product.id) {

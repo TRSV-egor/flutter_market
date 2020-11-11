@@ -5,16 +5,13 @@ import 'package:flutter_market/components/cart.dart';
 import 'package:flutter_market/screens/description_screen.dart';
 
 class CartScreen extends StatefulWidget {
-
   @override
   CartScreenState createState() => CartScreenState();
-
 }
 
 class CartScreenState extends State<CartScreen> {
-
   //Получить общую сумму корзины
-  _totalPrice (){
+  _totalPrice() {
     double a = 0.0;
     Cart.shared.addedProducts.forEach((element) {
       a += element.product.price * element.qty;
@@ -23,7 +20,7 @@ class CartScreenState extends State<CartScreen> {
   }
 
   //Получить общее количество
-  _totalValue (){
+  _totalValue() {
     int b = 0;
     Cart.shared.addedProducts.forEach((element) {
       b += element.qty;
@@ -31,59 +28,68 @@ class CartScreenState extends State<CartScreen> {
     return b;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Корзина"),
       ),
-      body: ListView.builder(
-          itemCount: Cart.shared.addedProducts.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-                onTap:() {
-                  //Navigator.of(context).pop();
-                  return Navigator.push(context,MaterialPageRoute(
-                    builder: (context)=> DescriptionScreen(
-                      product: Cart.shared.addedProducts[index].product, callback: () => setState((){}),)));
-                },
-              child: new Card(
-               child: ListTile(
-                title: Text(Cart.shared.addedProducts[index].product.title),
-                subtitle: Text(
-                  "Цена : ${Cart.shared.addedProducts[index].product.price}",
-                ),
-                leading: Image.network(
-                    Cart.shared.addedProducts[index].product.imageURL),
-                trailing: Container(
-                  child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        IconButton(
-                            icon: Icon(Icons.remove, color: Colors.red),
-                            onPressed: () {
-                              setState(() {
-                                Cart.shared.productRemove(
-                                    Cart.shared.addedProducts[index].product);
-                              });
-                            }),
-                        Text(
-                          "${Cart.shared.addedProducts[index].qty}",
+      body: Cart.shared.addedProducts.isEmpty
+          ? Center(
+              child: Text('Вы ещё ничего не добавили в корзину',
+                  style: Theme.of(context).textTheme.subtitle1))
+          : ListView.builder(
+              itemCount: Cart.shared.addedProducts.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                    onTap: () {
+                      //Navigator.of(context).pop();
+                      return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DescriptionScreen(
+                                    product: Cart
+                                        .shared.addedProducts[index].product,
+                                    callback: () => setState(() {}),
+                                  )));
+                    },
+                    child: new Card(
+                      child: ListTile(
+                        title: Text(
+                            Cart.shared.addedProducts[index].product.title),
+                        subtitle: Text(
+                          "Цена : ${Cart.shared.addedProducts[index].product.price}",
                         ),
-                        IconButton(
-                            icon: Icon(Icons.add, color: Colors.green),
-                            onPressed: () {
-                              setState(() {
-                                Cart.shared.productAdd(
-                                    Cart.shared.addedProducts[index].product);
-                              });
-                            }),
-                      ]),
-                ),
-              ),
-            ));
-          }),
+                        leading: Image.network(
+                            Cart.shared.addedProducts[index].product.imageURL),
+                        trailing: Container(
+                          child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                IconButton(
+                                    icon: Icon(Icons.remove, color: Colors.red),
+                                    onPressed: () {
+                                      setState(() {
+                                        Cart.shared.productRemove(Cart.shared
+                                            .addedProducts[index].product);
+                                      });
+                                    }),
+                                Text(
+                                  "${Cart.shared.addedProducts[index].qty}",
+                                ),
+                                IconButton(
+                                    icon: Icon(Icons.add, color: Colors.green),
+                                    onPressed: () {
+                                      setState(() {
+                                        Cart.shared.productAdd(Cart.shared
+                                            .addedProducts[index].product);
+                                      });
+                                    }),
+                              ]),
+                        ),
+                      ),
+                    ));
+              }),
       bottomNavigationBar: Container(
         color: Colors.indigo,
         child: Padding(
@@ -120,7 +126,7 @@ class CartScreenState extends State<CartScreen> {
                 child: MaterialButton(
                   height: 50,
                   onPressed: () {
-                    print(Cart.shared.addedProducts.isEmpty);
+                    print('Инициализация покупки');
                   },
                   child: Icon(Icons.account_balance_wallet_rounded),
                   color: Colors.white,

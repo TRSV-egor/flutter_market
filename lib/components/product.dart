@@ -7,16 +7,28 @@ class Product {
   String _imageURL;
   int _balance;
 
-  Product(this._id, this._price, this._title, this._description, this._imageURL, this._balance);
+  Product(this._id, this._price, this._title, this._description, this._imageURL,
+      this._balance);
 
   //Обработка данных из json
   factory Product.fromJSON(Map<String, dynamic> json) {
     if (json == null) {
       return null;
     } else {
-      return Product(json["id"], json["price"], json["title"], json["description"], json["imageURL"], json["balance"]);
+      return Product(json["id"], json["price"], json["title"],
+          json["description"], json["imageURL"], json["balance"]);
     }
   }
+
+  //Добавление данных в класс json
+  Map<String, dynamic> toJson() => {
+        "id": _id,
+        "price": _price,
+        "title": _title,
+        "description": _description,
+        "imageURL": _imageURL,
+        "balance": _balance
+      };
 
   //Доступ к переменных извне
   get id => this._id;

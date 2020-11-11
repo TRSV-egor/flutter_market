@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       //Отключение надписи дэбаг
       debugShowCheckedModeBanner: false,
 
@@ -30,13 +29,13 @@ class MyApp extends StatelessWidget {
 
       //Инициализация путей других экранов
       routes: {
-        '/splash':(BuildContext context) => WelcomeScreen(),
-        '/home':(BuildContext context) => HomeScreen(),
+        '/splash': (BuildContext context) => WelcomeScreen(),
+        '/home': (BuildContext context) => HomeScreen(),
+        //description требует получения объекта Product
         // '/description':(BuildContext context) => DescriptionScreen(),
-        '/cart':(BuildContext context) => CartScreen(),
-        '/favorite':(BuildContext context) => FavoriteScreen(),
-        '/settings':(BuildContext context) => SettingsScreen(),
-
+        '/cart': (BuildContext context) => CartScreen(),
+        '/favorite': (BuildContext context) => FavoriteScreen(),
+        '/settings': (BuildContext context) => SettingsScreen(),
       },
     );
   }
@@ -55,12 +54,18 @@ class WelcomeScreenState extends State<WelcomeScreen> {
     return SplashScreen(
       seconds: 5,
       navigateAfterSeconds: new HomeScreen(),
-      title: new Text('Buy parts smarter',
-        style: Theme.of(context).textTheme.headline5,),
-      image: new Image.asset('assets/images/SPM-500.jpg', height: 500, width: 500,),
+      title: new Text(
+        'Buy parts smarter',
+        style: Theme.of(context).textTheme.headline5,
+      ),
+      image: new Image.asset(
+        'assets/images/SPM-500.jpg',
+        height: 500,
+        width: 500,
+      ),
       loadingText: Text("Just a sec..."),
       photoSize: 100.0,
       loaderColor: Colors.indigoAccent,
-      );
-    }
+    );
+  }
 }

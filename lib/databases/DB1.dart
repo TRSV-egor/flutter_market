@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter_market/components/product.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -47,7 +48,7 @@ class DatabaseHelper {
       '''
       CREATE TABLE $_tableName (
       $columnId INTEGER PRIMARY KEY,
-      $columnPrice INTEGER,
+      $columnPrice REAL,
       $columnTitle TEXT NOT NULL,
       $columnDescription TEXT NOT NULL,
       $columnImageURL TEXT NOT NULL,
@@ -58,22 +59,42 @@ class DatabaseHelper {
   }
 
   //Вставить запись в таблицу
-  Future<int> insert(Map<String,dynamic> row) async{
-    Database db = await instance.database;
-    return await db.insert(_tableName, row);
-  }
+  Future<int> insert(product) async{
+      Database db = await instance.database;
+      return await db.insert(_tableName,
+        {columnId: product.id,
+         columnPrice: product.price,
+         columnTitle: product.title,
+         columnDescription: product.description,
+         columnImageURL: product.imageURL,
+         columnBalance: product.balance,
+      });
+    }
+
 
   //Получить всё содержимое таблицы
-  Future <List<Map<String,dynamic>>> queryAll() async{
+  Future <List<Product>> queryAll() async {
     Database db = await instance.database;
-    return await db.query(_tableName);
+    List<Product> productsList = [];
+    List<Map<String, dynamic>> productsFromDb = await db.query(_tableName);
+    productsFromDb.forEach((element) {
+      productsList.add(Product(element['id'], element['price'], element['title'], element['description'], element['imageURL'], element['balance']));
+    });
+    return productsList;
   }
 
   //Обновить требуемый элемент
-  Future<int> update(Map<String,dynamic> row) async{
+  Future<int> update(product) async{
     Database db = await instance.database;
-    int id = row[columnId];
-    return await db.update(_tableName, row,
+    int id = product.id;
+    return await db.update(_tableName,
+        {columnId: product.id,
+          columnPrice: product.price,
+          columnTitle: product.title,
+          columnDescription: product.description,
+          columnImageURL: product.imageURL,
+          columnBalance: product.balance,
+        },
         where: '$columnId = ?', whereArgs: [id]);
   }
 
@@ -90,9 +111,8 @@ class DatabaseHelper {
   }
 
   //Найти запись по ИД
-  query(Map<String,dynamic> row) async{
+  queryById(int id) async{
     Database db = await instance.database;
-    int id = row[columnId];
     return await db.rawQuery("SELECT $columnId FROM $_tableName WHERE $columnId = $id");
   }
 

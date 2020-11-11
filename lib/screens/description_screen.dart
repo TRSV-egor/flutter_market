@@ -7,12 +7,12 @@ import 'package:flutter_market/components/cart.dart';
 import 'package:flutter_market/components/product.dart';
 import 'package:flutter_market/databases/DB1.dart';
 
-
 class DescriptionScreen extends StatefulWidget {
   final Product product;
   final VoidCallback callback;
 
-  DescriptionScreen({Key key, @required this.product, this.callback}) : super(key: key);
+  DescriptionScreen({Key key, @required this.product, this.callback})
+      : super(key: key);
 
   @override
   _DescriptionScreenState createState() => _DescriptionScreenState();
@@ -23,10 +23,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 
   //Функция для изменения состояния лайка и добавления\удаления записи в БД
   pressLike() async {
-    List<Map> dataFromDB = await DatabaseHelper.instance
-        .query({DatabaseHelper.columnId: widget.product.id});
+    List<Map> dataFromDB =
+        await DatabaseHelper.instance.queryById(widget.product.id);
     if (dataFromDB.isNotEmpty) {
       DatabaseHelper.instance.delete(widget.product.id);
+      widget.callback();
       print('deleted');
 
       setState(() {
@@ -34,14 +35,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
       });
       print(like);
     } else {
-      await DatabaseHelper.instance.insert({
-        DatabaseHelper.columnId: widget.product.id,
-        DatabaseHelper.columnPrice: widget.product.price,
-        DatabaseHelper.columnTitle: widget.product.title,
-        DatabaseHelper.columnDescription: widget.product.description,
-        DatabaseHelper.columnImageURL: widget.product.imageURL,
-        DatabaseHelper.columnBalance: widget.product.balance,
-      });
+      await DatabaseHelper.instance.insert(widget.product);
+      widget.callback();
       print('added');
       setState(() {
         like = true;
@@ -50,14 +45,14 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
     }
   }
 
+  //При открытии выполняется Future builder и проверяется наличие в избранном товара
   Future<bool> check(id) async {
-    List<Map> dataFromDB =
-        await DatabaseHelper.instance.query({DatabaseHelper.columnId: id});
+    List<Map> dataFromDB = await DatabaseHelper.instance.queryById(id);
     if (dataFromDB.isNotEmpty) {
-      print('1');
+      print('В базе есть запись');
       return true;
     } else {
-      print('0');
+      print('В базе отсутствует запись');
       return false;
     }
   }
@@ -128,9 +123,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                   children: [
                     IconButton(
                       icon: Icon(
-                        like
-                            ? Icons.favorite
-                            : Icons.favorite_border_outlined,
+                        like ? Icons.favorite : Icons.favorite_border_outlined,
                         color: like ? Colors.red : Colors.black38,
                       ),
                       alignment: Alignment.centerLeft,
@@ -150,7 +143,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                         widget.callback();
                       },
                       child: const Text('В корзину'),
-                    )
+                    ),
                   ],
                 ),
               ),
