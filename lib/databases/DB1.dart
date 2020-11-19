@@ -59,17 +59,22 @@ class DatabaseHelper {
   }
 
   //Вставить запись в таблицу
-  Future<int> insert(product) async{
-      Database db = await instance.database;
-      return await db.insert(_tableName,
-        {columnId: product.id,
-         columnPrice: product.price,
-         columnTitle: product.title,
-         columnDescription: product.description,
-         columnImageURL: product.imageURL,
-         columnBalance: product.balance,
-      });
-    }
+  Future<int> insert(Product product) async {
+    Database db = await instance.database;
+    return await db.insert(_tableName, product.toJson());
+  }
+
+  // Future<int> insert(product) async{
+  //     Database db = await instance.database;
+  //     return await db.insert(_tableName,
+  //       {columnId: product.id,
+  //        columnPrice: product.price,
+  //        columnTitle: product.title,
+  //        columnDescription: product.description,
+  //        columnImageURL: product.imageURL,
+  //        columnBalance: product.balance,
+  //     });
+  //   }
 
 
   //Получить всё содержимое таблицы
@@ -78,7 +83,7 @@ class DatabaseHelper {
     List<Product> productsList = [];
     List<Map<String, dynamic>> productsFromDb = await db.query(_tableName);
     productsFromDb.forEach((element) {
-      productsList.add(Product(element['id'], element['price'], element['title'], element['description'], element['imageURL'], element['balance']));
+      productsList.add(Product.fromJSON(element));
     });
     return productsList;
   }
